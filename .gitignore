@@ -1,2 +1,5 @@
 bin/
 obj/
+
+# Generated via dotnet linq2db - see build step in .csproj
+Database/Models/
