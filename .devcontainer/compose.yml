@@ -1,0 +1,18 @@
+services:
+  dev-service:
+    image: mcr.microsoft.com/devcontainers/dotnet:10.0
+    volumes:
+      - ..:/workspaces/project
+    command: sleep infinity
+    env_file: .env.dev
+    depends_on:
+      - stalwart
+
+  stalwart:
+    image: stalwartlabs/stalwart:v1.0.0
+    env_file: .env.dev
+    volumes:
+      - stalwart-data:/opt/stalwart
+
+volumes:
+  stalwart-data:

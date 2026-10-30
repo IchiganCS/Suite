@@ -1,0 +1,17 @@
+{
+  "name": "suite",
+  "dockerComposeFile": "compose.yml",
+  "service": "dev-service",
+  "workspaceFolder": "/workspaces/project",
+  "forwardPorts": [ "stalwart:8080" ],
+  "customizations": {
+    "vscode": { "extensions": ["ms-dotnettools.csdevkit"] }
+  },
+  "features": {
+    "ghcr.io/SrzStephen/devcontainer-features/just:1": {
+        "lspVersion": "false",
+        "version": "1.59.0"
+    }
+  },
+  "postCreateCommand": "dotnet tool restore && dotnet restore"
+}

@@ -15,7 +15,7 @@
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <TextBox Text="{Binding SelectedMailbox.Name, Mode=OneWay}"
+    <TextBox Text="{Binding SelectedMailbox?.Name, Mode=OneWay}"
              HorizontalAlignment="Center"
              VerticalAlignment="Center" />
 

@@ -1,0 +1,9 @@
+{
+  "features": {
+    "ghcr.io/SrzStephen/devcontainer-features/just:1": {
+      "version": "1.0.1",
+      "resolved": "ghcr.io/srzstephen/devcontainer-features/just@sha256:74c3bd39fff7b2f788601d89e2ecaacfcc2ec297827707fe97c967df712516df",
+      "integrity": "sha256:74c3bd39fff7b2f788601d89e2ecaacfcc2ec297827707fe97c967df712516df"
+    }
+  }
+}
