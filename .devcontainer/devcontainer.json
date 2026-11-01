@@ -3,15 +3,15 @@
   "dockerComposeFile": "compose.yml",
   "service": "dev-service",
   "workspaceFolder": "/workspaces/project",
-  "forwardPorts": [ "stalwart:8080" ],
-  "customizations": {
-    "vscode": { "extensions": ["ms-dotnettools.csdevkit"] }
-  },
   "features": {
-    "ghcr.io/SrzStephen/devcontainer-features/just:1": {
-        "lspVersion": "false",
-        "version": "1.59.0"
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "moby": true,
+      "dockerDashComposeVersion": "v2"
     }
   },
-  "postCreateCommand": "dotnet tool restore && dotnet restore"
+  "postCreateCommand": {
+    "tool-restore": "dotnet tool restore",
+    "restore": "dotnet restore",
+    "stalwart-chmod": "chmod +x .devcontainer/stalwart/snapshot-config.sh .devcontainer/stalwart/apply-config.sh"
+  } 
 }
