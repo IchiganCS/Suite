@@ -1,12 +1,11 @@
 snapshot_path := justfile_directory() / ".devcontainer/stalwart/settings.ndjson"
 
 # Load the config snapshot into the mock Stalwart instance.
-# Uses recovery mode with a temporary admin if the CLI isn't usable yet,
-# then always recreates the container without the recovery variables.
 stalwart-apply-snapshot:
     #!/usr/bin/env bash
     set -euo pipefail
 
+    # Uses recovery mode with a temporary admin if the CLI isn't usable yet
     if ! stalwart-cli describe >/dev/null 2>&1; then
         echo "stalwart-cli not usable, starting recovery mode"
         STALWART_RECOVERY_MODE=1 STALWART_RECOVERY_ADMIN=admin:password \
