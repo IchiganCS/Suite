@@ -1,2 +1,30 @@
-stalwart-configure:
-  .devcontainer/stalwart/apply-config.sh
+snapshot_path := justfile_directory() / ".devcontainer/stalwart/settings.ndjson"
+
+# Load the config snapshot into the mock Stalwart instance.
+# Uses recovery mode with a temporary admin if the CLI isn't usable yet,
+# then always recreates the container without the recovery variables.
+stalwart-apply-snapshot:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    if ! stalwart-cli describe >/dev/null 2>&1; then
+        echo "stalwart-cli not usable, starting recovery mode"
+        STALWART_RECOVERY_MODE=1 STALWART_RECOVERY_ADMIN=admin:password \
+            docker compose up -d --force-recreate stalwart
+        timeout 60 bash -c 'until stalwart-cli describe >/dev/null 2>&1; do sleep 1; done'
+    fi
+
+    stalwart-cli apply --file "{{snapshot_path}}" --continue-on-error
+
+    echo "restarting without recovery admin"
+    docker compose up -d --force-recreate stalwart
+
+stalwart-make-snapshot:
+    #!/usr/bin/env bash
+    stalwart-cli snapshot \
+        Tenant Domain Directory DkimSignature AcmeProvider Certificate DnsServer Role \
+        Account Authentication \
+        SystemSettings DataRetention BlobStore InMemoryStore SearchStore \
+        --allow-unresolved PublicKey \
+        --include-secrets \
+        --output "{{snapshot_path}}"

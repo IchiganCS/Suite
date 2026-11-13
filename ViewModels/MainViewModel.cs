@@ -9,7 +9,7 @@ public partial class MainViewModel : ViewModelBase
 {
     public MainViewModel()
     {
-        DataOptions<DbContext> dataOptions = new(new DataOptions().UseSQLite("Data Source=/home/samuel/code/Suite/Database/MockData.sqlite", SQLiteProvider.Microsoft));
+        DataOptions<DbContext> dataOptions = new(new DataOptions().UseSQLite("Data Source=/workspaces/project/Database/MockData.sqlite", SQLiteProvider.Microsoft));
         DbContext dbContext = new(dataOptions);
         SelectedMailbox = dbContext.Mailboxes.Find(0);
     }

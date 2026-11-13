@@ -1,7 +1,11 @@
-FROM mcr.microsoft.com/dotnet/sdk:10.0
+FROM mcr.microsoft.com/dotnet/sdk:11.0
 
 RUN apt-get update \
- && apt-get install -y --no-install-recommends git tar xz-utils curl ca-certificates \
+ && apt-get install -y --no-install-recommends \
+ # devcontainer utils
+ git tar xz-utils curl ca-certificates \
+ # Avalonia dependencies
+ libfontconfig1 libice6 libsm6 libx11-6 libxext6 libxrandr2 libxi6 libxcursor1 \
  && rm -rf /var/lib/apt/lists/*
 
 # stalwart-cli
@@ -11,3 +15,8 @@ RUN curl --proto '=https' --tlsv1.2 -LsSf "https://github.com/stalwartlabs/cli/r
 # just
 ARG JUST_VERSION=1.59.0
 RUN curl --proto '=https' --tlsv1.2 -LsSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin --tag "${JUST_VERSION}"
+
+# just-lsp
+ARG JUST_LSP_VERSION=0.11.0
+RUN curl -fsSL https://github.com/terror/just-lsp/releases/download/${JUST_LSP_VERSION}/just-lsp-${JUST_LSP_VERSION}-x86_64-unknown-linux-gnu.tar.gz \
+    | tar -xz -C /usr/local/bin --wildcards '*just-lsp'

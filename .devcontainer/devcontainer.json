@@ -11,7 +11,10 @@
   },
   "postCreateCommand": {
     "tool-restore": "dotnet tool restore",
-    "restore": "dotnet restore",
-    "stalwart-chmod": "chmod +x .devcontainer/stalwart/snapshot-config.sh .devcontainer/stalwart/apply-config.sh"
-  } 
+    "restore": "dotnet restore"
+  },
+  "remoteEnv": {
+    "COMPOSE_FILE": "${containerWorkspaceFolder}/.devcontainer/compose.yml",
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  }
 }
