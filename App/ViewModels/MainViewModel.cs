@@ -7,7 +7,7 @@ using System;
 
 namespace Suite.App.ViewModels;
 
-public partial class MainViewModel : ViewModelBase
+public partial class MainViewModel : ObservableObject
 {
     public MainViewModel()
     {
