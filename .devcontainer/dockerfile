@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:11.0
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
  # devcontainer utils
- git tar xz-utils curl ca-certificates \
+ git tar xz-utils curl ca-certificates sqlite3 \
  # Avalonia dependencies
  libfontconfig1 libice6 libsm6 libx11-6 libxext6 libxrandr2 libxi6 libxcursor1 \
  && rm -rf /var/lib/apt/lists/*

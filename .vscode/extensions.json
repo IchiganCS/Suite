@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "avaloniateam.vscode-avalonia",
-        "nefrob.vscode-just-syntax"
+        "nefrob.vscode-just-syntax",
+        "yy0931.vscode-sqlite3-editor"
     ]
 }

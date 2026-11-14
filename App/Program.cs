@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using System;
 
-namespace Suite;
+namespace Suite.App;
 
 sealed class Program
 {

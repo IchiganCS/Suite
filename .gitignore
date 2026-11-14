@@ -1,5 +1,8 @@
 bin/
 obj/
+TestResults/
 
 # Generated via dotnet linq2db - see build step in .csproj
-Database/Models/
+App/Database/Models/
+# The working copy of the db
+App/Database/*.dev.sqlite*

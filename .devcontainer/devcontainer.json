@@ -15,6 +15,7 @@
   },
   "remoteEnv": {
     "COMPOSE_FILE": "${containerWorkspaceFolder}/.devcontainer/compose.yml",
-    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}",
+    "SUITE_DB": "${containerWorkspaceFolder}/App/Database/SuiteDB.dev.sqlite"
   }
 }

@@ -1,5 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <AssemblyName>Suite.App</AssemblyName>
+    <RootNamespace>Suite.App</RootNamespace>
+
     <OutputType>WinExe</OutputType>
     <TargetFramework>net11.0</TargetFramework>
     <Nullable>enable</Nullable>

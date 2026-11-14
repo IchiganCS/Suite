@@ -1,10 +1,10 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Suite.ViewModels;
-using Suite.Views;
+using Suite.App.ViewModels;
+using Suite.App.Views;
 
-namespace Suite;
+namespace Suite.App;
 
 public partial class App : Application
 {

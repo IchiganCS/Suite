@@ -1,7 +1,7 @@
 {
     "general": {
         "provider": "SQLite",
-        "connection": "Data Source=./MockData.sqlite",
+        "connection": "Data Source=./SuiteDB.dev.sqlite",
         "output": "./Models/",
         "overwrite": true
     },
@@ -9,7 +9,7 @@
         "context-name": "DbContext"
 	},
     "code": {
-        "namespace": "Suite.DataModel",
+        "namespace": "Suite.App.DataModel",
         "generated-suffix": true
     }
 }
