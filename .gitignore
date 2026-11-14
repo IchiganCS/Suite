@@ -5,4 +5,4 @@ TestResults/
 # Generated via dotnet linq2db - see build step in .csproj
 App/Database/Models/
 # The working copy of the db
-App/Database/*.dev.sqlite*
+App/Database/*.sqlite*

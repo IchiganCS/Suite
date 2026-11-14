@@ -1,8 +1,9 @@
 snapshot_path := justfile_directory() / ".devcontainer/stalwart/settings.ndjson"
 
 db_dir  := justfile_directory() / "App/Database"
-seed_db := db_dir / "SuiteDB.seed.sqlite"
-dev_db  := db_dir / "SuiteDB.dev.sqlite"
+schema_sql := db_dir / "schema.sql"
+data_sql   := db_dir / "seed-data.sql"
+dev_db     := db_dir / "SuiteDB.sqlite"
 
 # Load the config snapshot into the mock Stalwart instance.
 stalwart-apply-snapshot:
@@ -32,12 +33,16 @@ stalwart-make-snapshot:
         --include-secrets \
         --output "{{snapshot_path}}"
 
-# Reset the dev database to the committed seed.
+# Rebuild the dev database from the committed layout and mock data.
 db-reset:
     rm -f '{{dev_db}}' '{{dev_db}}-wal' '{{dev_db}}-shm'
-    cp '{{seed_db}}' '{{dev_db}}'
+    sqlite3 -bail '{{dev_db}}' < '{{schema_sql}}'
+    sqlite3 -bail '{{dev_db}}' < '{{data_sql}}'
 
-# Overwrite the committed seed with the dev database.
-db-promote:
+# Overwrite the committed layout and mock data with the dev database's.
+db-dump:
     test -f '{{dev_db}}'
-    sqlite3 '{{dev_db}}' ".backup '{{seed_db}}'"
+    sqlite3 '{{dev_db}}' .schema > '{{schema_sql}}.tmp'
+    sqlite3 '{{dev_db}}' '.dump --data-only' > '{{data_sql}}.tmp'
+    mv '{{schema_sql}}.tmp' '{{schema_sql}}'
+    mv '{{data_sql}}.tmp' '{{data_sql}}'

@@ -16,4 +16,4 @@ This command applies the stalwart snapshot so the server is correctly configured
 ```bash
 just db-reset
 ```
-There is a database commited into the project which holds mock data and  contains the database layout. However, for development purposes we don't operate on it exactly. This command creates a copy which the code operates on (which accesses it through `$SUITE_DB`). You can also copy the working copy into the git-commited file via command so it can be commited.
+There is a database schema commited into the project with some additional seed data and. However, for development purposes we create the database for it through this command. The code operates on it through an environment variable (`SUITE_DB`). You can also export the changed datbase through another just command.

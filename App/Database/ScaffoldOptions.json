@@ -1,7 +1,7 @@
 {
     "general": {
         "provider": "SQLite",
-        "connection": "Data Source=./SuiteDB.dev.sqlite",
+        "connection": "Data Source=./SuiteDB.sqlite",
         "output": "./Models/",
         "overwrite": true
     },
