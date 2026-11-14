@@ -1,0 +1,40 @@
+info:
+  name: fetch-emails
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{stalwart-jmap-url}}"
+  body:
+    type: json
+    data: |-
+      {
+        "using": ["urn:ietf:params:jmap:core", "urn:ietf:params:jmap:mail"],
+        "methodCalls": [
+          ["Email/query", {
+            "accountId": "{{accountId}}",
+            "filter": { "inMailbox": "{{inboxId}}" },
+            "sort": [{ "property": "receivedAt", "isAscending": false }],
+            "position": 0,
+            "limit": 50,
+            "calculateTotal": true
+          }, "q1"],
+          ["Email/get", {
+            "accountId": "{{accountId}}",
+            "#ids": { "resultOf": "q1", "name": "Email/query", "path": "/ids" },
+            "properties": [
+              "id", "threadId", "mailboxIds", "keywords",
+              "from", "to", "subject", "receivedAt", "size",
+              "hasAttachment", "preview"
+            ]
+          }, "g1"]
+        ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

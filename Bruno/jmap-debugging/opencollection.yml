@@ -19,9 +19,6 @@ request:
     type: basic
     username: "{{process.env.STALWART_USER}}"
     password: "{{process.env.STALWART_PASSWORD}}"
-  variables:
-    - name: freeAccountId
-      value: b
   scripts:
     - type: tests
       code: |-

@@ -1,0 +1,12 @@
+name: admin@stalwart.test-data
+variables:
+  - name: accountId
+    value: b
+  - name: draftId
+    value: d
+  - name: sentId
+    value: e
+  - name: inboxId
+    value: a
+  - name: email
+    value: admin@stalwart.test

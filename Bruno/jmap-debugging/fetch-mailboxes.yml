@@ -18,7 +18,7 @@ http:
           [
             "Mailbox/get",
             {
-              "accountId": "{{freeAccountId}}",
+              "accountId": "{{accountId}}",
               "ids": null
             },
             "c1"

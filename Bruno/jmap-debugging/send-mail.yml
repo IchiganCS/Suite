@@ -1,0 +1,61 @@
+info:
+  name: send-mail
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{stalwart-jmap-url}}"
+  body:
+    type: json
+    data: |-
+      {
+        "using": ["urn:ietf:params:jmap:core", "urn:ietf:params:jmap:mail", "urn:ietf:params:jmap:submission"],
+        "methodCalls": [
+          ["Email/set", {
+            "accountId": "{{accountId}}",
+            "create": {
+              "draft1": {
+                "mailboxIds": { "{{draftId}}": true },
+                "keywords": { "$draft": true },
+                "from": [{ "email": "{{sender}}" }],
+                "to": [{ "email": "{{receiver}}" }],
+                "subject": "{{subject}}",
+                "textBody": [{ "partId": "1", "type": "text/plain" }],
+                "bodyValues": { "1": { "value": "{{text}}" } }
+              }
+            }
+          }, "c1"],
+          ["EmailSubmission/set", {
+            "accountId": "{{accountId}}",
+            "create": {
+              "sub1": { "emailId": "#draft1", "identityId": "b" }
+            },
+            "onSuccessUpdateEmail": {
+              "#sub1": {
+                "keywords/$draft": null,
+                "mailboxIds/{{draftId}}": null,
+                "mailboxIds/{{sentId}}": true
+              }
+            }
+          }, "c2"]
+        ]
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: sender
+      value: "{{email}}"
+    - name: receiver
+      value: "{{sender}}"
+    - name: subject
+      value: Test Subject
+    - name: text
+      value: Just a sample message.
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
