@@ -27,7 +27,7 @@ stalwart-make-snapshot:
     #!/usr/bin/env bash
     stalwart-cli snapshot \
         Tenant Domain Directory DkimSignature AcmeProvider Certificate DnsServer Role \
-        Account Authentication \
+        Account Authentication OAuthClient \
         SystemSettings DataRetention BlobStore InMemoryStore SearchStore \
         --allow-unresolved PublicKey \
         --include-secrets \
